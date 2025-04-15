@@ -1,4 +1,3 @@
-
 import { useFormStore } from "@/store/formStore";
 import { FormComponentType } from "@/types/form";
 import { Button } from "@/components/ui/button";
@@ -7,7 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { 
   Type, TextCursor, Mail, Hash, Check, Circle, List, Calendar, Phone, 
   User, MapPin, Heading, AlignLeft, Minus, PanelLeftOpen, ChevronLeft,
-  Upload, CreditCard, Star, Toggle, SliderHorizontal, Link, ImageIcon,
+  Upload, CreditCard, Star, ToggleLeft, SlidersHorizontal, Link, ImageIcon,
   FileText, CloudUpload, ThumbsUp, Timer, DollarSign
 } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
@@ -38,8 +37,8 @@ const advancedComponents: ComponentCategoryItem[] = [
   { type: 'file', icon: <Upload size={18} />, label: 'File Upload' },
   { type: 'payment', icon: <CreditCard size={18} />, label: 'Payment' },
   { type: 'rating', icon: <Star size={18} />, label: 'Rating' },
-  { type: 'switch', icon: <Toggle size={18} />, label: 'Switch' },
-  { type: 'slider', icon: <SliderHorizontal size={18} />, label: 'Slider' },
+  { type: 'switch', icon: <ToggleLeft size={18} />, label: 'Switch' },
+  { type: 'slider', icon: <SlidersHorizontal size={18} />, label: 'Slider' },
 ];
 
 const layoutComponents: ComponentCategoryItem[] = [
