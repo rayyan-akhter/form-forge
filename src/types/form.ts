@@ -34,7 +34,15 @@ export type FormComponentType =
   | 'address'
   | 'heading'
   | 'paragraph'
-  | 'divider';
+  | 'divider'
+  | 'file'
+  | 'payment'
+  | 'rating'
+  | 'switch'
+  | 'slider'
+  | 'image'
+  | 'link'
+  | 'fileDisplay';
 
 export type FormComponentOption = {
   id: string;
@@ -53,6 +61,14 @@ export type FormComponent = {
   defaultValue?: string | string[] | boolean | number;
   validation?: ValidationRule[];
   width?: 'full' | 'half' | 'third';
+  imageUrl?: string;
+  linkUrl?: string;
+  linkText?: string;
+  min?: number;
+  max?: number;
+  step?: number;
+  acceptedFileTypes?: string;
+  maxFileSize?: number;
 };
 
 export type FormData = {

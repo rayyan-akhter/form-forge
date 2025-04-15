@@ -1,4 +1,3 @@
-
 import { create } from 'zustand';
 import { FormComponent, FormComponentType, FormData, ThemeSettings } from '@/types/form';
 import { nanoid } from 'nanoid';
@@ -131,6 +130,57 @@ const createComponentTemplate = (type: FormComponentType): Omit<FormComponent, '
         ...baseTemplate,
         placeholder: 'Enter your address',
       };
+    case 'file':
+      return {
+        ...baseTemplate,
+        label: 'File Upload',
+        acceptedFileTypes: '.pdf,.docx,.jpg,.png',
+        maxFileSize: 5, // in MB
+      };
+    case 'payment':
+      return {
+        ...baseTemplate,
+        label: 'Payment',
+      };
+    case 'rating':
+      return {
+        ...baseTemplate,
+        label: 'Rate your experience',
+        max: 5,
+      };
+    case 'switch':
+      return {
+        ...baseTemplate,
+        label: 'Toggle Option',
+        defaultValue: false,
+      };
+    case 'slider':
+      return {
+        ...baseTemplate,
+        label: 'Slider',
+        min: 0,
+        max: 100,
+        step: 1,
+        defaultValue: 50,
+      };
+    case 'image':
+      return {
+        ...baseTemplate,
+        label: 'Image',
+        imageUrl: 'https://via.placeholder.com/400x200',
+      };
+    case 'link':
+      return {
+        ...baseTemplate,
+        label: 'Link',
+        linkText: 'Click here',
+        linkUrl: 'https://example.com',
+      };
+    case 'fileDisplay':
+      return {
+        ...baseTemplate,
+        label: 'File Display',
+      };
     case 'heading':
       return {
         ...baseTemplate,
@@ -164,6 +214,14 @@ function getDefaultLabel(type: FormComponentType): string {
     case 'phone': return 'Phone Number';
     case 'name': return 'Name';
     case 'address': return 'Address';
+    case 'file': return 'File Upload';
+    case 'payment': return 'Payment';
+    case 'rating': return 'Rating';
+    case 'switch': return 'Switch';
+    case 'slider': return 'Slider';
+    case 'image': return 'Image';
+    case 'link': return 'Link';
+    case 'fileDisplay': return 'File Display';
     case 'heading': return 'Heading';
     case 'paragraph': return 'Paragraph';
     case 'divider': return 'Divider';
@@ -284,4 +342,4 @@ export const useFormStore = create<FormState>((set) => ({
     isThemeSettingsOpen: !state.isThemeSettingsOpen,
     isComponentSettingsOpen: false,
   })),
-}));
+});
