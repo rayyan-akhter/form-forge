@@ -3,19 +3,11 @@
 
 import { useFormStore } from "@/store/formStore";
 import { Button } from "@/components/ui/button";
-import { Eye, PenSquare, Share2, DownloadIcon, LogOut } from "lucide-react";
+import { Eye, PenSquare, Share2, DownloadIcon, LogOut, Palette } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function FormBuilderHeader() {
-  const { mode, setMode } = useFormStore();
-  
-  const togglePreview = () => {
-    if (mode === 'edit') {
-      setMode('preview');
-    } else {
-      setMode('edit');
-    }
-  };
+  const { mode, setMode, toggleThemeSettings } = useFormStore();
   
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
@@ -57,6 +49,10 @@ export default function FormBuilderHeader() {
         </div>
         
         <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" onClick={toggleThemeSettings}>
+            <Palette className="w-4 h-4 mr-2" />
+            Theme
+          </Button>
           <Button variant="outline" size="sm">
             <Share2 className="w-4 h-4 mr-2" />
             Share
