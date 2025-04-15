@@ -4,21 +4,16 @@
 import { useFormStore } from "@/store/formStore";
 import { Button } from "@/components/ui/button";
 import { Eye, PenSquare, Share2, DownloadIcon, LogOut } from "lucide-react";
-import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { Link } from "react-router-dom";
 
 export default function FormBuilderHeader() {
   const { mode, setMode } = useFormStore();
-  const router = useRouter();
-  const pathname = usePathname();
   
   const togglePreview = () => {
     if (mode === 'edit') {
       setMode('preview');
-      router.push('/preview');
     } else {
       setMode('edit');
-      router.push('/');
     }
   };
   
@@ -35,9 +30,10 @@ export default function FormBuilderHeader() {
               onClick={() => {
                 if (mode !== 'edit') {
                   setMode('edit');
-                  router.push('/');
                 }
               }}
+              as={Link}
+              to="/"
             >
               <PenSquare className="w-4 h-4 mr-2" />
               Edit
@@ -49,9 +45,10 @@ export default function FormBuilderHeader() {
               onClick={() => {
                 if (mode !== 'preview') {
                   setMode('preview');
-                  router.push('/preview');
                 }
               }}
+              as={Link}
+              to="/preview"
             >
               <Eye className="w-4 h-4 mr-2" />
               Preview
@@ -68,12 +65,15 @@ export default function FormBuilderHeader() {
             <DownloadIcon className="w-4 h-4 mr-2" />
             Export
           </Button>
-          <Link href="/" passHref>
-            <Button variant="outline" size="sm">
-              <LogOut className="w-4 h-4 mr-2" />
-              Exit
-            </Button>
-          </Link>
+          <Button 
+            variant="outline" 
+            size="sm"
+            as={Link}
+            to="/"
+          >
+            <LogOut className="w-4 h-4 mr-2" />
+            Exit
+          </Button>
         </div>
       </div>
     </header>
