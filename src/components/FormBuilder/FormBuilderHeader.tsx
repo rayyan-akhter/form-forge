@@ -1,74 +1,79 @@
 
-import { Button } from "@/components/ui/button";
+"use client";
+
 import { useFormStore } from "@/store/formStore";
-import { Settings, Eye, Pencil } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
+import { Eye, PenSquare, Share2, DownloadIcon, LogOut } from "lucide-react";
+import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function FormBuilderHeader() {
-  const { mode, setMode, form, toggleThemeSettings } = useFormStore();
-  const { toast } = useToast();
-
-  const handleModeToggle = () => {
-    setMode(mode === 'edit' ? 'preview' : 'edit');
-    
+  const { mode, setMode } = useFormStore();
+  const router = useRouter();
+  const pathname = usePathname();
+  
+  const togglePreview = () => {
     if (mode === 'edit') {
-      toast({
-        title: "Preview Mode",
-        description: "You are now in preview mode. Form validation is active.",
-      });
+      setMode('preview');
+      router.push('/preview');
     } else {
-      toast({
-        title: "Edit Mode",
-        description: "You are now in edit mode. Drag and drop components to build your form.",
-      });
+      setMode('edit');
+      router.push('/');
     }
   };
-
-  const copyToClipboard = () => {
-    // In a real app, this would generate a shareable URL or export JSON
-    navigator.clipboard.writeText(JSON.stringify(form, null, 2));
-    toast({
-      title: "Form data copied",
-      description: "Form data has been copied to clipboard as JSON.",
-    });
-  };
-
+  
   return (
-    <header className="bg-white border-b border-border sticky top-0 z-10 shadow-sm">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div>
-          <h1 className="text-xl font-semibold text-foreground font-poppins">
-            {form.title || "Untitled Form"}
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            Last updated: {new Date(form.updatedAt).toLocaleString()}
-          </p>
-        </div>
+    <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
+      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm" onClick={toggleThemeSettings}>
-            <Settings size={16} className="mr-2" />
-            Theme
+          <h1 className="text-xl font-bold">Form Builder</h1>
+          <div className="flex border rounded-md overflow-hidden">
+            <Button
+              variant={mode === 'edit' ? "default" : "outline"}
+              size="sm"
+              className="rounded-none"
+              onClick={() => {
+                if (mode !== 'edit') {
+                  setMode('edit');
+                  router.push('/');
+                }
+              }}
+            >
+              <PenSquare className="w-4 h-4 mr-2" />
+              Edit
+            </Button>
+            <Button
+              variant={mode === 'preview' ? "default" : "outline"}
+              size="sm"
+              className="rounded-none"
+              onClick={() => {
+                if (mode !== 'preview') {
+                  setMode('preview');
+                  router.push('/preview');
+                }
+              }}
+            >
+              <Eye className="w-4 h-4 mr-2" />
+              Preview
+            </Button>
+          </div>
+        </div>
+        
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm">
+            <Share2 className="w-4 h-4 mr-2" />
+            Share
           </Button>
-          <Button variant="outline" size="sm" onClick={copyToClipboard}>
+          <Button variant="outline" size="sm">
+            <DownloadIcon className="w-4 h-4 mr-2" />
             Export
           </Button>
-          <Button 
-            variant={mode === 'edit' ? 'outline' : 'default'} 
-            size="sm" 
-            onClick={handleModeToggle}
-          >
-            {mode === 'edit' ? (
-              <>
-                <Eye size={16} className="mr-2" />
-                Preview
-              </>
-            ) : (
-              <>
-                <Pencil size={16} className="mr-2" />
-                Edit
-              </>
-            )}
-          </Button>
+          <Link href="/" passHref>
+            <Button variant="outline" size="sm">
+              <LogOut className="w-4 h-4 mr-2" />
+              Exit
+            </Button>
+          </Link>
         </div>
       </div>
     </header>

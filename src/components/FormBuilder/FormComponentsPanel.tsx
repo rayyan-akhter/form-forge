@@ -1,3 +1,5 @@
+"use client";
+
 import { useFormStore } from "@/store/formStore";
 import { FormComponentType } from "@/types/form";
 import { Button } from "@/components/ui/button";
@@ -7,7 +9,7 @@ import {
   Type, TextCursor, Mail, Hash, Check, Circle, List, Calendar, Phone, 
   User, MapPin, Heading, AlignLeft, Minus, PanelLeftOpen, ChevronLeft,
   Upload, CreditCard, Star, ToggleLeft, SlidersHorizontal, Link, ImageIcon,
-  FileText, CloudUpload, ThumbsUp, Timer, DollarSign
+  FileText
 } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import { useState } from "react";
