@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,20 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Form builder specific colors
+				builder: {
+					primary: '#6366f1', // Indigo
+					secondary: '#a855f7', // Purple
+					accent: '#ec4899', // Pink
+					background: '#f8fafc', // Light gray
+					foreground: '#1e293b', // Dark gray/blue
+					border: '#e2e8f0', // Light gray
+				},
+			},
+			fontFamily: {
+				'inter': ['Inter', 'sans-serif'],
+				'poppins': ['Poppins', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
