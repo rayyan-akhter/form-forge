@@ -342,4 +342,4 @@ export const useFormStore = create<FormState>((set) => ({
     isThemeSettingsOpen: !state.isThemeSettingsOpen,
     isComponentSettingsOpen: false
   }))
-});
+}));
