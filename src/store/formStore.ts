@@ -335,11 +335,11 @@ export const useFormStore = create<FormState>((set) => ({
 
   toggleComponentSettings: () => set((state) => ({ 
     isComponentSettingsOpen: !state.isComponentSettingsOpen,
-    isThemeSettingsOpen: false,
+    isThemeSettingsOpen: false
   })),
   
   toggleThemeSettings: () => set((state) => ({ 
     isThemeSettingsOpen: !state.isThemeSettingsOpen,
-    isComponentSettingsOpen: false,
-  })),
+    isComponentSettingsOpen: false
+  }))
 });
