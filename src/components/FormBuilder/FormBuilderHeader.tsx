@@ -23,36 +23,36 @@ export default function FormBuilderHeader() {
         <div className="flex items-center gap-3">
           <h1 className="text-xl font-bold">Form Builder</h1>
           <div className="flex border rounded-md overflow-hidden">
-            <Button
-              variant={mode === 'edit' ? "default" : "outline"}
-              size="sm"
-              className="rounded-none"
-              onClick={() => {
-                if (mode !== 'edit') {
-                  setMode('edit');
-                }
-              }}
-              as={Link}
-              to="/"
-            >
-              <PenSquare className="w-4 h-4 mr-2" />
-              Edit
-            </Button>
-            <Button
-              variant={mode === 'preview' ? "default" : "outline"}
-              size="sm"
-              className="rounded-none"
-              onClick={() => {
-                if (mode !== 'preview') {
-                  setMode('preview');
-                }
-              }}
-              as={Link}
-              to="/preview"
-            >
-              <Eye className="w-4 h-4 mr-2" />
-              Preview
-            </Button>
+            <Link to="/">
+              <Button
+                variant={mode === 'edit' ? "default" : "outline"}
+                size="sm"
+                className="rounded-none"
+                onClick={() => {
+                  if (mode !== 'edit') {
+                    setMode('edit');
+                  }
+                }}
+              >
+                <PenSquare className="w-4 h-4 mr-2" />
+                Edit
+              </Button>
+            </Link>
+            <Link to="/preview">
+              <Button
+                variant={mode === 'preview' ? "default" : "outline"}
+                size="sm"
+                className="rounded-none"
+                onClick={() => {
+                  if (mode !== 'preview') {
+                    setMode('preview');
+                  }
+                }}
+              >
+                <Eye className="w-4 h-4 mr-2" />
+                Preview
+              </Button>
+            </Link>
           </div>
         </div>
         
@@ -65,15 +65,12 @@ export default function FormBuilderHeader() {
             <DownloadIcon className="w-4 h-4 mr-2" />
             Export
           </Button>
-          <Button 
-            variant="outline" 
-            size="sm"
-            as={Link}
-            to="/"
-          >
-            <LogOut className="w-4 h-4 mr-2" />
-            Exit
-          </Button>
+          <Link to="/">
+            <Button variant="outline" size="sm">
+              <LogOut className="w-4 h-4 mr-2" />
+              Exit
+            </Button>
+          </Link>
         </div>
       </div>
     </header>
