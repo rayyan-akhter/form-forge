@@ -1,4 +1,3 @@
-
 import { FormComponent } from "@/types/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -51,7 +50,6 @@ export default function FormComponentRenderer({ component, isPreview }: FormComp
               id={id}
               placeholder={component.placeholder}
               style={inputStyles}
-              disabled={!isPreview}
             />
             {component.helpText && (
               <p className="text-sm text-muted-foreground mt-1">{component.helpText}</p>
@@ -69,7 +67,6 @@ export default function FormComponentRenderer({ component, isPreview }: FormComp
               id={id}
               placeholder={component.placeholder}
               style={inputStyles}
-              disabled={!isPreview}
             />
             {component.helpText && (
               <p className="text-sm text-muted-foreground mt-1">{component.helpText}</p>
@@ -88,7 +85,6 @@ export default function FormComponentRenderer({ component, isPreview }: FormComp
               type="email"
               placeholder={component.placeholder}
               style={inputStyles}
-              disabled={!isPreview}
             />
             {component.helpText && (
               <p className="text-sm text-muted-foreground mt-1">{component.helpText}</p>
@@ -107,7 +103,6 @@ export default function FormComponentRenderer({ component, isPreview }: FormComp
               type="number"
               placeholder={component.placeholder}
               style={inputStyles}
-              disabled={!isPreview}
             />
             {component.helpText && (
               <p className="text-sm text-muted-foreground mt-1">{component.helpText}</p>
@@ -124,7 +119,7 @@ export default function FormComponentRenderer({ component, isPreview }: FormComp
             <div className="space-y-2 mt-2">
               {component.options?.map((option) => (
                 <div key={option.id} className="flex items-center space-x-2">
-                  <Checkbox id={`${id}-${option.id}`} disabled={!isPreview} />
+                  <Checkbox id={`${id}-${option.id}`} />
                   <Label htmlFor={`${id}-${option.id}`} className="text-sm font-normal">
                     {option.label}
                   </Label>
@@ -143,7 +138,7 @@ export default function FormComponentRenderer({ component, isPreview }: FormComp
             <Label style={labelStyles}>
               {component.label} {requiredIndicator}
             </Label>
-            <RadioGroup className="mt-2" disabled={!isPreview}>
+            <RadioGroup className="mt-2">
               {component.options?.map((option) => (
                 <div key={option.id} className="flex items-center space-x-2">
                   <RadioGroupItem id={`${id}-${option.id}`} value={option.value} />
@@ -165,7 +160,7 @@ export default function FormComponentRenderer({ component, isPreview }: FormComp
             <Label htmlFor={id} style={labelStyles}>
               {component.label} {requiredIndicator}
             </Label>
-            <Select disabled={!isPreview}>
+            <Select>
               <SelectTrigger id={id} style={inputStyles}>
                 <SelectValue placeholder={component.placeholder} />
               </SelectTrigger>
@@ -199,7 +194,6 @@ export default function FormComponentRenderer({ component, isPreview }: FormComp
                     !component.defaultValue && "text-muted-foreground"
                   )}
                   style={inputStyles}
-                  disabled={!isPreview}
                 >
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {component.defaultValue ? 
@@ -228,7 +222,6 @@ export default function FormComponentRenderer({ component, isPreview }: FormComp
               type="tel"
               placeholder={component.placeholder}
               style={inputStyles}
-              disabled={!isPreview}
             />
             {component.helpText && (
               <p className="text-sm text-muted-foreground mt-1">{component.helpText}</p>
@@ -246,7 +239,6 @@ export default function FormComponentRenderer({ component, isPreview }: FormComp
               id={id}
               placeholder={component.placeholder}
               style={inputStyles}
-              disabled={!isPreview}
             />
             {component.helpText && (
               <p className="text-sm text-muted-foreground mt-1">{component.helpText}</p>
@@ -264,20 +256,18 @@ export default function FormComponentRenderer({ component, isPreview }: FormComp
               <Input 
                 placeholder="Street Address" 
                 style={inputStyles} 
-                disabled={!isPreview} 
               />
               <Input 
                 placeholder="Street Address Line 2" 
                 style={inputStyles} 
-                disabled={!isPreview} 
               />
               <div className="grid grid-cols-2 gap-2">
-                <Input placeholder="City" style={inputStyles} disabled={!isPreview} />
-                <Input placeholder="State / Province" style={inputStyles} disabled={!isPreview} />
+                <Input placeholder="City" style={inputStyles} />
+                <Input placeholder="State / Province" style={inputStyles} />
               </div>
               <div className="grid grid-cols-2 gap-2">
-                <Input placeholder="Postal / Zip Code" style={inputStyles} disabled={!isPreview} />
-                <Select disabled={!isPreview}>
+                <Input placeholder="Postal / Zip Code" style={inputStyles} />
+                <Select>
                   <SelectTrigger style={inputStyles}>
                     <SelectValue placeholder="Country" />
                   </SelectTrigger>
