@@ -8,12 +8,33 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function FormBuilderHeader() {
-  const { mode, setMode, toggleThemeSettings } = useFormStore();
+  const { mode, setMode, toggleThemeSettings, form } = useFormStore();
   const navigate = useNavigate();
   
   const handleSave = () => {
-    // Here we would typically save the form to a backend
-    // For now, we'll just show a toast and redirect to home
+    // Get existing forms from localStorage or initialize empty array
+    const existingForms = JSON.parse(localStorage.getItem('savedForms') || '[]');
+    
+    // Check if the form already exists (to update it)
+    const formIndex = existingForms.findIndex((savedForm) => savedForm.id === form.id);
+    
+    if (formIndex !== -1) {
+      // Update existing form
+      existingForms[formIndex] = {
+        ...form,
+        lastEdited: new Date().toISOString()
+      };
+    } else {
+      // Add new form
+      existingForms.push({
+        ...form,
+        lastEdited: new Date().toISOString()
+      });
+    }
+    
+    // Save updated forms to localStorage
+    localStorage.setItem('savedForms', JSON.stringify(existingForms));
+    
     toast.success("Form saved successfully!");
     navigate("/");
   };
