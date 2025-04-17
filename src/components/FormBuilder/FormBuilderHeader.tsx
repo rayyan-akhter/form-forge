@@ -3,11 +3,20 @@
 
 import { useFormStore } from "@/store/formStore";
 import { Button } from "@/components/ui/button";
-import { Eye, PenSquare, Share2, DownloadIcon, LogOut, Palette } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Eye, PenSquare, Palette, Save } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function FormBuilderHeader() {
   const { mode, setMode, toggleThemeSettings } = useFormStore();
+  const navigate = useNavigate();
+  
+  const handleSave = () => {
+    // Here we would typically save the form to a backend
+    // For now, we'll just show a toast and redirect to home
+    toast.success("Form saved successfully!");
+    navigate("/");
+  };
   
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
@@ -15,7 +24,7 @@ export default function FormBuilderHeader() {
         <div className="flex items-center gap-3">
           <h1 className="text-xl font-bold">Form Builder</h1>
           <div className="flex border rounded-md overflow-hidden">
-            <Link to="/">
+            <Link to="/form-builder">
               <Button
                 variant={mode === 'edit' ? "default" : "outline"}
                 size="sm"
@@ -53,20 +62,10 @@ export default function FormBuilderHeader() {
             <Palette className="w-4 h-4 mr-2" />
             Theme
           </Button>
-          <Button variant="outline" size="sm">
-            <Share2 className="w-4 h-4 mr-2" />
-            Share
+          <Button variant="default" size="sm" onClick={handleSave}>
+            <Save className="w-4 h-4 mr-2" />
+            Save
           </Button>
-          <Button variant="outline" size="sm">
-            <DownloadIcon className="w-4 h-4 mr-2" />
-            Export
-          </Button>
-          <Link to="/">
-            <Button variant="outline" size="sm">
-              <LogOut className="w-4 h-4 mr-2" />
-              Exit
-            </Button>
-          </Link>
         </div>
       </div>
     </header>

@@ -1,8 +1,8 @@
 
-import FormBuilder from "@/components/FormBuilder/FormBuilder";
+import { Navigate } from "react-router-dom";
 
 const Index = () => {
-  return <FormBuilder />;
+  return <Navigate to="/" replace />;
 };
 
 export default Index;
