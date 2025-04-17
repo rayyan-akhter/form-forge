@@ -21,3 +21,7 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+
+## Deployed Link
+
+URL : https://formforger.netlify.app/
