@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { FilePlus, ArrowRight, Trash2 } from "lucide-react";
 import { useFormStore } from "@/store/formStore";
@@ -15,7 +14,8 @@ interface FormItem {
 
 const HomePage = () => {
   const [savedForms, setSavedForms] = useState<FormItem[]>([]);
-  const { updateFormSettings } = useFormStore();
+  const { updateFormSettings, resetForm } = useFormStore();
+  const navigate = useNavigate();
 
   // Fetch saved forms from localStorage
   const fetchSavedForms = () => {
@@ -52,6 +52,12 @@ const HomePage = () => {
     }
   };
 
+  // Handle creating a new form
+  const handleCreateNewForm = () => {
+    resetForm();
+    navigate("/form-builder");
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
@@ -66,12 +72,10 @@ const HomePage = () => {
           <p className="text-gray-600 mb-4">
             Start with a blank form and add your own questions and components.
           </p>
-          <Link to="/form-builder">
-            <Button className="mt-2">
-              <FilePlus className="w-4 h-4 mr-2" />
-              Create New Form
-            </Button>
-          </Link>
+          <Button className="mt-2" onClick={handleCreateNewForm}>
+            <FilePlus className="w-4 h-4 mr-2" />
+            Create New Form
+          </Button>
         </div>
         
         {savedForms && savedForms.length > 0 ? (

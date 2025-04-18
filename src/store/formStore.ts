@@ -23,6 +23,7 @@ interface FormState {
   setIsDragging: (isDragging: boolean) => void;
   toggleComponentSettings: () => void;
   toggleThemeSettings: () => void;
+  resetForm: () => void;
 }
 
 const defaultTheme: ThemeSettings = {
@@ -40,7 +41,7 @@ const defaultTheme: ThemeSettings = {
   spacing: '1rem',
 };
 
-const defaultForm: FormData = {
+const createDefaultForm = (): FormData => ({
   id: nanoid(),
   title: 'Untitled Form',
   description: 'Form description',
@@ -48,7 +49,9 @@ const defaultForm: FormData = {
   theme: defaultTheme,
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
-};
+});
+
+const defaultForm = createDefaultForm();
 
 // Create form component templates
 const createComponentTemplate = (type: FormComponentType): Omit<FormComponent, 'id'> => {
@@ -341,5 +344,13 @@ export const useFormStore = create<FormState>((set) => ({
   toggleThemeSettings: () => set((state) => ({ 
     isThemeSettingsOpen: !state.isThemeSettingsOpen,
     isComponentSettingsOpen: false
-  }))
+  })),
+
+  resetForm: () => set({
+    form: createDefaultForm(),
+    selectedComponentId: null,
+    isComponentSettingsOpen: false,
+    isThemeSettingsOpen: false,
+    mode: 'edit'
+  })
 }));

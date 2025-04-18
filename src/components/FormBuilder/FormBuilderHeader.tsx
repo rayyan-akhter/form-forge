@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useFormStore } from "@/store/formStore";
@@ -45,21 +44,19 @@ export default function FormBuilderHeader() {
         <div className="flex items-center gap-3">
           <h1 className="text-xl font-bold">Form Builder</h1>
           <div className="flex border rounded-md overflow-hidden">
-            <Link to="/form-builder">
-              <Button
-                variant={mode === 'edit' ? "default" : "outline"}
-                size="sm"
-                className="rounded-none"
-                onClick={() => {
-                  if (mode !== 'edit') {
-                    setMode('edit');
-                  }
-                }}
-              >
-                <PenSquare className="w-4 h-4 mr-2" />
-                Edit
-              </Button>
-            </Link>
+            <Button
+              variant={mode === 'edit' ? "default" : "outline"}
+              size="sm"
+              className="rounded-none"
+              onClick={() => {
+                if (mode !== 'edit') {
+                  setMode('edit');
+                }
+              }}
+            >
+              <PenSquare className="w-4 h-4 mr-2" />
+              Edit
+            </Button>
             <Link to="/preview">
               <Button
                 variant={mode === 'preview' ? "default" : "outline"}
