@@ -14,6 +14,7 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ComponentCategoryItem {
   type: FormComponentType;
@@ -55,6 +56,7 @@ const layoutComponents: ComponentCategoryItem[] = [
 export default function FormComponentsPanel() {
   const { addComponent, mode } = useFormStore();
   const [collapsed, setCollapsed] = useState(false);
+  const isMobile = useIsMobile();
 
   const handleAddComponent = (type: FormComponentType) => {
     if (mode === 'edit') {
@@ -69,28 +71,33 @@ export default function FormComponentsPanel() {
   return (
     <div 
       className={cn(
-        "border-r bg-sidebar border-border h-[calc(100vh-4rem)] flex flex-col transition-all duration-300 ease-in-out",
-        collapsed ? "w-12" : "w-72"
+        "bg-sidebar border-border flex flex-col transition-all duration-300 ease-in-out",
+        isMobile 
+          ? "w-full h-full border-none" 
+          : "border-r h-[calc(100vh-4rem)]",
+        collapsed && !isMobile ? "w-12" : !isMobile ? "w-72" : "w-full"
       )}
     >
       <div className="p-4 border-b border-border flex justify-between items-center">
-        {!collapsed && (
+        {(!collapsed || isMobile) && (
           <h2 className="font-medium text-lg flex items-center">
             <PanelLeftOpen size={18} className="mr-2" />
             Components
           </h2>
         )}
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          className={cn("p-0 h-8 w-8", collapsed && "mx-auto")}
-          onClick={() => setCollapsed(!collapsed)}
-        >
-          <ChevronLeft className={cn("transition-transform", collapsed && "rotate-180")} size={18} />
-        </Button>
+        {!isMobile && (
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className={cn("p-0 h-8 w-8", collapsed && "mx-auto")}
+            onClick={() => setCollapsed(!collapsed)}
+          >
+            <ChevronLeft className={cn("transition-transform", collapsed && "rotate-180")} size={18} />
+          </Button>
+        )}
       </div>
       
-      {!collapsed && (
+      {(!collapsed || isMobile) && (
         <ScrollArea className="flex-1">
           <Tabs defaultValue="basic" className="w-full">
             <div className="px-4 pt-4">
@@ -145,7 +152,7 @@ export default function FormComponentsPanel() {
         </ScrollArea>
       )}
       
-      {collapsed && (
+      {collapsed && !isMobile && (
         <div className="flex flex-col items-center gap-4 mt-4">
           <Button 
             variant="ghost" 
